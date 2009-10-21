@@ -1,0 +1,11 @@
+blas: BLAS (Basic Linear Algebra Subprograms)
+blas:
+blas: BLAS is a set of efficient routines for most of the basic vector
+blas: and matrix operations.  They are widely used as the basis for other
+blas: high quality linear algebra software (e.g. lapack and linpack).
+blas: This implementation is the Fortran 77 reference implementation
+blas: found at netlib. 
+blas:
+blas:
+blas:
+blas: Packaged by Georgi D. Sotirov <gdsotirov@dir.bg>
