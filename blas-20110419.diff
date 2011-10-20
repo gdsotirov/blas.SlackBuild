@@ -1,0 +1,62 @@
+# Enable shared library build
+# Copyright (C) 2009,2011 Georgi D. Sotirov <gdsotirov@dir.bg>
+#
+# This program is free software; you can redistribute it and/or
+# modify it under the terms of the GNU General Public License
+# as published by the Free Software Foundation; either version 2
+# of the License, or (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+# 
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, write to the Free Software
+# Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+#
+# Visit SlackPack at http://sotirov-bg.net/slackpack/
+#
+# $Id: blas-20110419.diff,v 1.1 2011/10/20 21:21:20 gsotirov Exp $
+#
+
+diff -urNad BLAS-orig/Makefile BLAS/Makefile
+--- BLAS-orig/Makefile	2007-04-05 23:59:57.000000000 +0300
++++ BLAS/Makefile	2011-10-21 00:03:47.000000000 +0300
+@@ -138,8 +138,7 @@
+ 	$(ZBLAS2) $(ZBLAS3) $(ALLBLAS)
+ 
+ $(BLASLIB): $(ALLOBJ)
+-	$(ARCH) $(ARCHFLAGS) $@ $(ALLOBJ)
+-	$(RANLIB) $@
++	$(FORTRAN) -shared -Wl,-soname=$@ -o $@ $(ALLOBJ)
+ 
+ single: $(SBLAS1) $(ALLBLAS) $(SBLAS2) $(SBLAS3)
+ 	$(ARCH) $(ARCHFLAGS) $(BLASLIB) $(SBLAS1) $(ALLBLAS) \
+@@ -165,7 +164,7 @@
+ 	@FRC=$(FRC)
+ 
+ clean:
+-	rm -f *.o
++	rm -f *.o *.so.*
+ 
+ .f.o: 
+ 	$(FORTRAN) $(OPTS) -c $< -o $@
+diff -urNad BLAS-orig/make.inc BLAS/make.inc
+--- BLAS-orig/make.inc	2011-04-19 22:08:00.000000000 +0300
++++ BLAS/make.inc	2011-10-21 00:05:46.000000000 +0300
+@@ -16,7 +16,7 @@
+ #  desired load options for your machine.
+ #
+ FORTRAN  = gfortran
+-OPTS     = -O3
++OPTS     = $(FFLAGS) -fPIC
+ DRVOPTS  = $(OPTS)
+ NOOPT    =
+ LOADER   = gfortran
+@@ -31,4 +31,4 @@
+ #
+ #  The location and name of the Reference BLAS library.
+ #
+-BLASLIB      = blas$(PLAT).a
++BLASLIB      = libblas.so
