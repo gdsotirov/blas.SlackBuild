@@ -19,13 +19,15 @@
 #
 # Visit SlackPack at http://sotirov-bg.net/slackpack/
 #
-# $Id: blas.SlackBuild,v 1.5 2016/09/23 09:44:20 gsotirov Exp $
+# $Id: blas.SlackBuild,v 1.6 2016/09/23 10:14:08 gsotirov Exp $
 #
 . ../../slack-package.conf
 
 NAME=blas
 NAME_UC=`echo $NAME | tr [:lower:] [:upper:]`
-VERSION=3.6.0
+VER_MAJ=3
+VER_MIN=6
+VERSION=${VER_MAJ}.${VER_MIN}.0
 ARCH=${ARCH:-i586}
 BUILD=${BUILD:-1}
 
@@ -80,7 +82,11 @@ make -j4 || exit 5
 
 # Install
 install -d -m 755 $PKG/usr/lib${LIBDIRSUFFIX}
-install -m 644 $SRC/libblas.so $PKG/usr/lib${LIBDIRSUFFIX}
+install -m 644 $SRC/lib${NAME}.so $PKG/usr/lib${LIBDIRSUFFIX}/lib${NAME}.so.${VERSION}
+( cd $PKG/usr/lib${LIBDIRSUFFIX}
+  ln -s lib${NAME}.so.${VERSION} lib${NAME}.so.${VER_MAJ}.${VER_MIN} 
+  ln -s lib${NAME}.so.${VERSION} lib${NAME}.so.${VER_MAJ} 
+  ln -s lib${NAME}.so.${VERSION} lib${NAME}.so )
 install -d -m 755 $PKG/usr/lib${LIBDIRSUFFIX}/pkgconfig
 cat << EOF >> $PKG/usr/lib${LIBDIRSUFFIX}/pkgconfig/${NAME}.pc
 prefix=/usr
