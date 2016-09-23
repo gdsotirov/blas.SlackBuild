@@ -19,7 +19,7 @@
 #
 # Visit SlackPack at http://sotirov-bg.net/slackpack/
 #
-# $Id: blas.SlackBuild,v 1.4 2016/09/23 09:01:23 gsotirov Exp $
+# $Id: blas.SlackBuild,v 1.5 2016/09/23 09:44:20 gsotirov Exp $
 #
 . ../../slack-package.conf
 
@@ -81,6 +81,19 @@ make -j4 || exit 5
 # Install
 install -d -m 755 $PKG/usr/lib${LIBDIRSUFFIX}
 install -m 644 $SRC/libblas.so $PKG/usr/lib${LIBDIRSUFFIX}
+install -d -m 755 $PKG/usr/lib${LIBDIRSUFFIX}/pkgconfig
+cat << EOF >> $PKG/usr/lib${LIBDIRSUFFIX}/pkgconfig/${NAME}.pc
+prefix=/usr
+libdir=/usr/lib${LIBDIRSUFFIX}
+
+Name: blas
+Description: Basic Linear Algebra Subprograms F77 reference implementations
+Version: ${VERSION}
+URL: http://www.netlib.org/blas/
+Libs: -L/usr/lib${LIBDIRSUFFIX} -lblas
+Libs.private: -lm
+EOF
+
 install -d -m 755 $PKG/usr/doc/${NAME}-${VERSION}
 install -m 644 $CWD/README.in $PKG/usr/doc/${NAME}-${VERSION}/README.in
 install -m 644 $CWD/BSDLIC    $PKG/usr/doc/${NAME}-${VERSION}/COPYING
