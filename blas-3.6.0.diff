@@ -1,5 +1,5 @@
 # Enable shared library build
-# Copyright (C) 2009-2016 Georgi D. Sotirov <gdsotirov@dir.bg>
+# Copyright (C) 2009-2016 Georgi D. Sotirov <gdsotirov@gmail.com>
 #
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU General Public License
@@ -10,14 +10,12 @@
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
-# 
+#
 # You should have received a copy of the GNU General Public License
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #
-# Visit SlackPack at http://sotirov-bg.net/slackpack/
-#
-# $Id: blas-3.6.0.diff,v 1.1 2016/09/23 08:53:52 gsotirov Exp $
+# Visit SlackPack at https://sotirov-bg.net/slackpack/
 #
 diff -urNad BLAS-3.6.0-orig/Makefile BLAS-3.6.0/Makefile
 --- BLAS-3.6.0-orig/Makefile	2015-10-08 03:50:12.000000000 +0300
