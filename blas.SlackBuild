@@ -94,7 +94,7 @@ libdir=/usr/lib${LIBDIRSUFFIX}
 Name: blas
 Description: Basic Linear Algebra Subprograms F77 reference implementations
 Version: ${VERSION}
-URL: http://www.netlib.org/blas/
+URL: https://www.netlib.org/blas/
 Libs: -L/usr/lib${LIBDIRSUFFIX} -lblas
 Libs.private: -lm
 EOF
