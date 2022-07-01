@@ -25,7 +25,7 @@
 NAME=blas
 NAME_UC=`echo $NAME | tr [:lower:] [:upper:]`
 VER_MAJ=3
-VER_MIN=6
+VER_MIN=10
 VERSION=${VER_MAJ}.${VER_MIN}.0
 ARCH=${ARCH:-i586}
 BUILD=${BUILD:-1}
@@ -52,7 +52,7 @@ mkdir --parents $PKG
 
 # Extract the source
 cd $TMP
-tar --extract --verbose --file=$CWD/${NAME}-${VERSION}.tar.gz || exit 3
+tar --extract --verbose --file=$CWD/${NAME}-${VERSION}.tgz || exit 3
 cd $SRC
 fix_source
 
@@ -77,7 +77,7 @@ else
 fi
 
 FFLAGS=$SLKFFLAGS \
-make --jobs 4 || exit 5
+make --jobs || exit 5
 
 # Install
 install --directory --mode 755 $PKG/usr/lib${LIBDIRSUFFIX}
