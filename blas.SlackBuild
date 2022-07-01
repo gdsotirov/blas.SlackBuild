@@ -81,7 +81,8 @@ make --jobs 4 || exit 5
 
 # Install
 install --directory --mode 755 $PKG/usr/lib${LIBDIRSUFFIX}
-install --mode 644 $SRC/lib${NAME}.so $PKG/usr/lib${LIBDIRSUFFIX}/lib${NAME}.so.${VERSION}
+install --mode 644 --preserve-timestamps \
+        $SRC/lib${NAME}.so $PKG/usr/lib${LIBDIRSUFFIX}/lib${NAME}.so.${VERSION}
 ( cd $PKG/usr/lib${LIBDIRSUFFIX}
   ln --symbolic lib${NAME}.so.${VERSION} lib${NAME}.so.${VER_MAJ}.${VER_MIN} 
   ln --symbolic lib${NAME}.so.${VERSION} lib${NAME}.so.${VER_MAJ} 
@@ -100,26 +101,36 @@ Libs.private: -lm
 EOF
 
 install --directory --mode 755 $PKG/usr/doc/${NAME}-${VERSION}
-install --mode 644 $CWD/README.in $PKG/usr/doc/${NAME}-${VERSION}/README.in
-install --mode 644 $CWD/BSDLIC    $PKG/usr/doc/${NAME}-${VERSION}/COPYING
+install --mode 644 --preserve-timestamps \
+        $CWD/README.in $PKG/usr/doc/${NAME}-${VERSION}/README.in
+install --mode 644 --preserve-timestamps \
+        $CWD/BSDLIC    $PKG/usr/doc/${NAME}-${VERSION}/COPYING
 
 # Prepare the package
 ( cd $PKG; strip_lib )
 
 install --mode 755 --directory $PKG/install
-install --mode 644 $CWD/slack-desc     $PKG/install/slack-desc
-install --mode 644 $CWD/slack-required $PKG/install/slack-required
+install --mode 644 --preserve-timestamps \
+        $CWD/slack-desc     $PKG/install/slack-desc
+install --mode 644 --preserve-timestamps \
+        $CWD/slack-required $PKG/install/slack-required
 
 SBDIR=$PKG/usr/src/slackbuilds/${NAME}-${VERSION}
 install --mode 755 --directory $SBDIR
-install --mode 644 $CWD/slack-desc              $SBDIR/slack-desc
-install --mode 644 $CWD/slack-required          $SBDIR/slack-required
-install --mode 644 $CWD/README.in               $SBDIR/README.in
-install --mode 644 $CWD/BSDLIC                  $SBDIR/BSDLIC
+install --mode 644 --preserve-timestamps \
+        $CWD/slack-desc              $SBDIR/slack-desc
+install --mode 644 --preserve-timestamps \
+        $CWD/slack-required          $SBDIR/slack-required
+install --mode 644 --preserve-timestamps \
+        $CWD/README.in               $SBDIR/README.in
+install --mode 644 --preserve-timestamps \
+        $CWD/BSDLIC                  $SBDIR/BSDLIC
 if [ -e $CWD/${NAME}-${VERSION}.diff ]; then
-install --mode 644 $CWD/${NAME}-${VERSION}.diff $SBDIR/${NAME}-${VERSION}.diff
+install --mode 644 --preserve-timestamps \
+        $CWD/${NAME}-${VERSION}.diff $SBDIR/${NAME}-${VERSION}.diff
 fi
-install --mode 644 $CWD/${NAME}.SlackBuild      $SBDIR/${NAME}.SlackBuild
+install --mode 644 --preserve-timestamps \
+        $CWD/${NAME}.SlackBuild      $SBDIR/${NAME}.SlackBuild
 
 # Pack
 cd $PKG
